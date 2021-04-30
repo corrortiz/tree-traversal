@@ -6,6 +6,7 @@ import Container from './common/ComponentContainer';
 
 const TextArea = styled.textarea`
   max-width: 40rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `;
 
 function TreeText({ treeText, handleOnChange, handleOnProcess }) {
@@ -14,8 +15,8 @@ function TreeText({ treeText, handleOnChange, handleOnProcess }) {
       <TextArea
         onChange={handleOnChange}
         value={treeText}
-        rows={25}
-        cols={100}
+        rows={15}
+        cols={30}
       />
       <ProcessButton onClick={handleOnProcess}>Process</ProcessButton>
     </Container>

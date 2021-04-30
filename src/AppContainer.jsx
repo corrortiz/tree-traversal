@@ -1,21 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import DataFetcher from './components/DataFetcher';
 import TreeText from './components/TreeText';
+import Output from './components/Output';
+import treeNodeFormatter from './utils/treeNodeFormatter';
 
-const StyledAppContainer = styled.h1`
-  background-color: #fafafa;
-  flex-direction: flex;
-  flex: 1;
+const StyledAppContainer = styled.div`
+  padding: 1rem 3rem;
 `;
 
 const Title = styled.h1`
   color: #6e2c5e;
+  margin: 0;
 `;
 
 function AppContainer() {
-  const [fileName, setFileName] = React.useState('');
-  const [treeText, setTreeTex] = React.useState('');
+  const [fileName, setFileName] = useState('');
+  const [treeText, setTreeTex] = useState('');
+  const [treeData, setTreeData] = useState(null);
 
   const handleOnFetch = (event) => {
     try {
@@ -26,9 +28,15 @@ function AppContainer() {
       const fileReader = new FileReader();
 
       fileReader.onload = (event) => {
-        console.log({ event });
         const result = JSON.parse(event.target.result);
-        const formatted = JSON.stringify(result, null, 2);
+
+        let formatted;
+        if (Array.isArray(result)) {
+          formatted = JSON.stringify(treeNodeFormatter(result), null, 2);
+        } else {
+          formatted = JSON.stringify(result, null, 2);
+        }
+
         setTreeTex(formatted);
       };
 
@@ -38,15 +46,25 @@ function AppContainer() {
     }
   };
 
+  const handleOnChange = (event) => {
+    setTreeTex(event.target.value);
+  };
+
+  const handleOnProcess = () => {
+    const newTreeData = JSON.parse(treeText);
+    setTreeData(newTreeData);
+  };
+
   return (
     <StyledAppContainer>
       <Title>Tree Traversal</Title>
       <DataFetcher handleOnFetch={handleOnFetch} fileName={fileName} />
       <TreeText
-        handleOnChange={setTreeTex}
+        handleOnChange={handleOnChange}
         treeText={treeText}
-        handleOnProcess={() => {}}
+        handleOnProcess={handleOnProcess}
       />
+      <Output treeData={treeData} />
     </StyledAppContainer>
   );
 }

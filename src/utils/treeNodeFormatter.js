@@ -25,16 +25,4 @@ function treeNodeFormatter(initialArray) {
   return createBinaryTree(initialArray);
 }
 
-console.log(
-  JSON.stringify(
-    treeNodeFormatter([
-      'a',
-      ['b', ['b1'], ['b2', ['b21'], ['b22']]],
-      [
-        'c',
-        ['c1', ['c11', ['c111']], ['c12', null, ['c121']]],
-        ['c2', null, ['c21']],
-      ],
-    ]),
-  ),
-);
+export default treeNodeFormatter;

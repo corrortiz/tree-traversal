@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FetchButton from './common/Button';
 import Container from './common/ComponentContainer';
+import styled from 'styled-components';
+
+const FileName = styled.div`
+  color: #6e2c5e;
+`;
 
 function DataFetcher({ handleOnFetch, fileName }) {
   // Create a reference to the hidden file input element
@@ -14,8 +19,8 @@ function DataFetcher({ handleOnFetch, fileName }) {
 
   return (
     <Container>
-      <p>Process the input into a tree</p>
-      <p>{fileName}</p>
+      <h3>Process the input into a tree</h3>
+      <FileName>{fileName}</FileName>
       <FetchButton onClick={handleClick} id="fetcher">
         Fetch
       </FetchButton>

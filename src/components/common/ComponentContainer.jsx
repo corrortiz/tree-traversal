@@ -5,7 +5,7 @@ const StyledComponentContainer = styled.div`
   flex-direction: column;
 
   & > * {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 `;
 
