@@ -25,8 +25,8 @@ function TreeText({ treeText, handleOnChange, handleOnProcess }) {
 
 TreeText.propTypes = {
   treeText: PropTypes.string.isRequired,
-  handleOnChange: PropTypes.string.isRequired,
-  handleOnProcess: PropTypes.string.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
+  handleOnProcess: PropTypes.func.isRequired,
 };
 
 export default TreeText;

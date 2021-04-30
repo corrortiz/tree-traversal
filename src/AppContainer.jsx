@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import DataFetcher from './components/DataFetcher';
 import TreeText from './components/TreeText';
@@ -18,6 +18,7 @@ function AppContainer() {
   const [fileName, setFileName] = useState('');
   const [treeText, setTreeTex] = useState('');
   const [treeData, setTreeData] = useState(null);
+  const boxRef = useRef(null);
 
   const handleOnFetch = (event) => {
     try {
@@ -52,7 +53,17 @@ function AppContainer() {
 
   const handleOnProcess = () => {
     const newTreeData = JSON.parse(treeText);
-    setTreeData(newTreeData);
+    const treeArray = Object.entries(newTreeData).map((item) => item);
+    treeArray.forEach((branch) => {
+      if (branch[0] === 'id') {
+        const newElement = document.createElement('div');
+        newElement.style.border = '1px solid red';
+        newElement.style.margin = '8px';
+        newElement.style.textAlign = 'center';
+        newElement.innerText = branch[1];
+        boxRef.current.appendChild(newElement);
+      }
+    });
   };
 
   return (
@@ -60,11 +71,11 @@ function AppContainer() {
       <Title>Tree Traversal</Title>
       <DataFetcher handleOnFetch={handleOnFetch} fileName={fileName} />
       <TreeText
-        handleOnChange={handleOnChange}
         treeText={treeText}
+        handleOnChange={handleOnChange}
         handleOnProcess={handleOnProcess}
       />
-      <Output treeData={treeData} />
+      <Output treeData={treeData} boxRef={boxRef} />
     </StyledAppContainer>
   );
 }

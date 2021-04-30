@@ -11,17 +11,18 @@ const OutputContainer = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `;
 
-function Output({ treeData }) {
+function Output({ treeData, boxRef }) {
   return (
     <ComponentContainer>
       <h3>Output</h3>
-      <OutputContainer />
+      <OutputContainer ref={boxRef} />
     </ComponentContainer>
   );
 }
 
 Output.propTypes = {
-  treeData: PropTypes.object,
+  treeData: PropTypes.array,
+  boxRef: PropTypes.func,
 };
 
 export default Output;
