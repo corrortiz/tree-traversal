@@ -17,7 +17,6 @@ const Title = styled.h1`
 function AppContainer() {
   const [fileName, setFileName] = useState('');
   const [treeText, setTreeTex] = useState('');
-  const [treeData, setTreeData] = useState(null);
   const boxRef = useRef(null);
 
   const handleOnFetch = (event) => {
@@ -55,12 +54,12 @@ function AppContainer() {
     const newTreeData = JSON.parse(treeText);
     const treeArray = Object.entries(newTreeData).map((item) => item);
     treeArray.forEach((branch) => {
+      const newElement = document.createElement('div');
+      newElement.style.border = '1px solid red';
+      newElement.style.margin = '8px';
+      newElement.style.textAlign = 'center';
+      newElement.innerText = branch[1];
       if (branch[0] === 'id') {
-        const newElement = document.createElement('div');
-        newElement.style.border = '1px solid red';
-        newElement.style.margin = '8px';
-        newElement.style.textAlign = 'center';
-        newElement.innerText = branch[1];
         boxRef.current.appendChild(newElement);
       }
     });
@@ -75,7 +74,7 @@ function AppContainer() {
         handleOnChange={handleOnChange}
         handleOnProcess={handleOnProcess}
       />
-      <Output treeData={treeData} boxRef={boxRef} />
+      <Output boxRef={boxRef} />
     </StyledAppContainer>
   );
 }

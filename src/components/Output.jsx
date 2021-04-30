@@ -11,7 +11,7 @@ const OutputContainer = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `;
 
-function Output({ treeData, boxRef }) {
+function Output({ boxRef }) {
   return (
     <ComponentContainer>
       <h3>Output</h3>
@@ -21,7 +21,6 @@ function Output({ treeData, boxRef }) {
 }
 
 Output.propTypes = {
-  treeData: PropTypes.array,
   boxRef: PropTypes.func,
 };
 
